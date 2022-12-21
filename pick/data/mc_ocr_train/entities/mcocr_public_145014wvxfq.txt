@@ -1,0 +1,1 @@
+{"ADDRESS": "ĐC: 23 Nguyễn Thị Định - Trung Hòa - Cầu Giấy - HN", "TIMESTAMP": "06.07.2020", "TOTAL_COST": "234000"}

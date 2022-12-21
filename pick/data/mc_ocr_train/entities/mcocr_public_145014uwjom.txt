@@ -1,0 +1,1 @@
+{"TOTAL_COST": "232,008", "TIMESTAMP": "Ngày : 15/08/2020 14:50", "SELLER": "MINIMART ANAN", "ADDRESS": "Chợ Sủi Phú Thị Gia Lâm"}

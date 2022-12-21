@@ -1,0 +1,1 @@
+{"SELLER": "THÀNH PHỐ VINH", "ADDRESS": "Số 178 Trần Phú, Hồng Sơn, TP. Vinh, Nghệ An", "TIMESTAMP": "Ngày mua: 14:14:24 14/08/2020", "TOTAL_COST": "Tiền hàng: 46.000"}

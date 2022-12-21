@@ -1,0 +1,1 @@
+{"SELLER": "FamilyMart", "ADDRESS": "TX Lĩ An, Bình Dương", "TIMESTAMP": "Ngày 13/08/2020 - Giờ: 18:41", "TOTAL_COST": "8.000"}

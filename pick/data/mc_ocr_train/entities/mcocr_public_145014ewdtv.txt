@@ -1,0 +1,1 @@
+{"ADDRESS": "TP. Cẩm Phả, Quảng Ninh", "TIMESTAMP": "Ngày bán: 13/08/2020", "TOTAL_COST": "45.400"}

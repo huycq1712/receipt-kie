@@ -1,0 +1,1 @@
+{"SELLER": "Tax invoice will be issued within same day", "TOTAL_COST": "Phải thu khách hàng:", "TIMESTAMP": "Ngày"}

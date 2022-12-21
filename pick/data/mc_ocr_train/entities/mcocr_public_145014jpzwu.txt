@@ -1,0 +1,1 @@
+{"TOTAL_COST": "650000", "TIMESTAMP": "Ngày 14 tháng 08 năm 2020", "ADDRESS": "Hà Nội"}

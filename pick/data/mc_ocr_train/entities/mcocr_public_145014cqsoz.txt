@@ -1,0 +1,1 @@
+{"SELLER": "Vit Commerce", "ADDRESS": "TP. Cẩm Phả, Quảng Ninh", "TIMESTAMP": "Ngày bán: 13/08/2020 10:31", "TOTAL_COST": "99,400"}

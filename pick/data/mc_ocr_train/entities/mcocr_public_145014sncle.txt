@@ -1,0 +1,1 @@
+{"SELLER": "Cty LD TNHH KFC Viet Nam", "ADDRESS": "92 Ba Trieu, Hai Ba Trung, Ha N", "TIMESTAMP": "15 Aug 20 19:12:07", "TOTAL_COST": "Total"}

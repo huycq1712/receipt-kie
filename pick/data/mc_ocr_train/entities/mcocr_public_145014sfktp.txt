@@ -1,0 +1,1 @@
+{"SELLER": "Co.op mart", "ADDRESS": "Quang Trung Q.9", "TIMESTAMP": "Ngày: 15/07/2020 18:55:24", "TOTAL_COST": "Tong so tien thanh toan: 429,776.00"}

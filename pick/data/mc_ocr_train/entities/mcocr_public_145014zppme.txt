@@ -1,0 +1,1 @@
+{"ADDRESS": "Co.op Food HN THE K-PARK", "TIMESTAMP": "Ngay : 20/09/2019 15 : 02 : 49", "TOTAL_COST": "55,300.00"}

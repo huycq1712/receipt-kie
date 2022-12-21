@@ -1,0 +1,1 @@
+{"SELLER": "VinCommerce", "ADDRESS": "Q.Bình Thạnh, TP.HCM", "TIMESTAMP": "Ngày bán: 12/08/2020 17:12", "TOTAL_COST": "235.932"}

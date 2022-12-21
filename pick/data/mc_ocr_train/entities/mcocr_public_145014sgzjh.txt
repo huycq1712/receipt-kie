@@ -1,0 +1,1 @@
+{"SELLER": "MINIMART ANAN", "ADDRESS": "Chợ Sủi Phú Thị Gia Lâm", "TOTAL_COST": "82,000", "TIMESTAMP": "Ngày: 16/08/2020 20:20:58"}

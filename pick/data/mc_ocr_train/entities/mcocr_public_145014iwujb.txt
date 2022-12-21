@@ -1,0 +1,1 @@
+{"ADDRESS": "37 Nguyễn Thượng Hiền - Quận Hai Bà Trưng, Hà Nội", "TIMESTAMP": "Ngày bán: 14/08/2020 11:44", "TOTAL_COST": "Tổng tiền hàng:"}

@@ -1,0 +1,1 @@
+{"TOTAL_COST": "18,200.00", "TIMESTAMP": "Ngày: 23/09/2019 9:10:04", "ADDRESS": "P. Phu La, Q.Ha Dong, Tp Ha Noi", "SELLER": "Co.op Food HN THE K-PARK"}

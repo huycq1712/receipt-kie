@@ -1,0 +1,1 @@
+{"SELLER": "VinCommerce", "ADDRESS": "Số 1060-1062 Đường Trần Phú", "TIMESTAMP": "Ngày bán: 13/08/2020 10:16", "TOTAL_COST": "TỔNG TIỀN PHẢI T.TOÁN"}

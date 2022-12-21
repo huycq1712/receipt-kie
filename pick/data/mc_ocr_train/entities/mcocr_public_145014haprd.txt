@@ -1,0 +1,1 @@
+{"SELLER": "Phúc Anh Minimart", "TIMESTAMP": "Ngày: 14-08-2020", "TOTAL_COST": "224,000"}

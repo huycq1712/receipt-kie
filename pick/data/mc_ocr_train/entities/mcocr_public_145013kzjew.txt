@@ -1,0 +1,1 @@
+{"SELLER": "VinCommerce", "ADDRESS": "Mi Phạm Ngọc Thạch", "TIMESTAMP": "Ngày bán: 14/08/2020 15:33", "TOTAL_TOTAL_COST": "TỔNG TIỀN PHẢI T.TOÁN"}

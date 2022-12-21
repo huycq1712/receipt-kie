@@ -1,0 +1,1 @@
+{"SELLER": "THE COFFEE HQUSE", "ADDRESS": "14B1 Ngô Tất Tổ, Q Bình Thanh", "TIMESTAMP": "THời gian: 16.08.2020 08.51", "TOTAL_COST": "Thanh Toán:"}

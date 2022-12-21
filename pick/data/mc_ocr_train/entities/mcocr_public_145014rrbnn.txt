@@ -1,0 +1,1 @@
+{"SELLER": "VinCommerce", "TIMESTAMP": "Ngày bán: 22/08/2020 18:13", "TOTAL_COST": "243.214", "ADDRESS": "P.Minh Khai, Q Bắc Từ Liêm, HN"}

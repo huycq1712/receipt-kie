@@ -1,0 +1,1 @@
+{"SELLER": "Vcommerce", "ADDRESS": "Số 112 Thanh Hiên, P.Cẩm Thành", "TIMESTAMP": "Ngày bán: 14/08/2020 06:16", "TOTAL_COST": "19.900"}

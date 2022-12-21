@@ -1,0 +1,1 @@
+{"SELLER": "Tiền trả", "ADDRESS": "244/23a Huỳnh Văn Bánh, P.11,Q PN", "TIMESTAMP": "04.10.2020 12.00", "TOTAL_COST": "81 000"}

@@ -1,0 +1,1 @@
+{"SELLER": "BÁCH HOÀ XANH", "ADDRESS": "Chiêu, Phường Tân Đông Hiệp, Thị xã Dĩ An.", "TIMESTAMP": "01/08/2020 11:45", "TOTAL_COST": "88,500"}

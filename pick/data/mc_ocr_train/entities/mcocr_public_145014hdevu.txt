@@ -1,0 +1,1 @@
+{"SELLER": "PHÀ", "ADDRESS": "Phả - Quảng Ninh", "TIMESTAMP": "Ngày: 10/08/2020 (09:55 CH - 09:55 CH)", "TOTAL_COST": "105.000đ"}

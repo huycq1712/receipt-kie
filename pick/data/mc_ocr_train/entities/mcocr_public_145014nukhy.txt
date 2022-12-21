@@ -1,0 +1,1 @@
+{"SELLER": "CỬA HÀNG NĂM OÁNH", "TIMESTAMP": "Ngày: 10-08-2020", "TOTAL_COST": "70,000"}

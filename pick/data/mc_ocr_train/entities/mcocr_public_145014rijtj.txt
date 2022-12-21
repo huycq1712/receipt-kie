@@ -1,0 +1,1 @@
+{"SELLER": "Satra Group", "ADDRESS": "2B Bình Lợi, Phường 13, Quận Bình Thạnh", "TIMESTAMP": "18:20", "TOTAL_COST": "43.500.00"}

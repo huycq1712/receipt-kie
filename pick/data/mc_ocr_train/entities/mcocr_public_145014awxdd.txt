@@ -1,0 +1,1 @@
+{"SELLER": "Co.op Food HN THE K-PARK", "ADDRESS": "tai khu do thi moi Van Phu,", "TIMESTAMP": "Ngày: 19/09/2019 18:15:14", "TOTAL_COST": "Tong so tien thanh toan: 41,520.40"}

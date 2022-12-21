@@ -1,0 +1,1 @@
+{"SELLER": "VM + HNI 32 Láng Trung", "ADDRESS": "Q. Đống Đa, Hà Nội", "TIMESTAMP": "Ngày bán: 11/08/2020 19:04", "TOTAL_COST": "108.000"}

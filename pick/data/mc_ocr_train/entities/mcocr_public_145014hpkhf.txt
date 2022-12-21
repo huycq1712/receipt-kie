@@ -1,0 +1,1 @@
+{"TOTAL_COST": "VND 36.100", "ADDRESS": "VM+ QNH Tổ 7, khu Minh Tiến A", "TIMESTAMP": "m"}

@@ -1,0 +1,1 @@
+{"SELLER": "CTY CP SÁCH & TBTH QUẢNG NINH", "ADDRESS": "ĐC Số 10 Long Tien - TP Hạ Long - ON", "TIMESTAMP": "Print time: 21:54:05 10/08/2020", "TOTAL_COST": "33.212.050d"}

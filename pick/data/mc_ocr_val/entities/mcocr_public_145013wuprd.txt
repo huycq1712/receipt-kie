@@ -1,0 +1,1 @@
+{"SELLER": "Nhà Hàng Út Giang Nguyễn Chánh", "ADDRESS": "Nhà số 7 Khu B Liền kè A10 Nam Trung Yên (Đi vào", "TIMESTAMP": "Ngày: 28/07/2020 (06:45 CH - 08:32 CH)", "TOTAL_COST": "640,000đ"}

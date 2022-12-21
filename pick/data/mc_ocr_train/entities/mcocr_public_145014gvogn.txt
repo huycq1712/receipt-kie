@@ -1,0 +1,1 @@
+{"SELLER": "Siêu thị thú cưng PET YÊU", "ADDRESS": "Quận Bình Thạnh, Hồ Chí Minh", "TIMESTAMP": "Ngày 17 tháng 08 năm 2020", "TOTAL_COST": "Tổng thanh toán: 63.000"}

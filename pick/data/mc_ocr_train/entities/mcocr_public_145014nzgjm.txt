@@ -1,0 +1,1 @@
+{"SELLER": "Milano Coffee Vietnam", "ADDRESS": "186 Cây Trâm, P.11, Q.Gò Vấp, TP.HCM", "TIMESTAMP": "02.10.202020 18.25", "TOTAL_COST": "CASH(VND) - 64 000"}

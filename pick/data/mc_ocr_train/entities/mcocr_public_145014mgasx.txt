@@ -1,0 +1,1 @@
+{"SELLER": "Co.op mart", "ADDRESS": "0.3", "TIMESTAMP": "16:44:18", "TOTAL_COST": "880,400.00"}

@@ -1,0 +1,1 @@
+{"SELLER": "VinCommerce", "ADDRESS": "Số 112 Thanh Niên, P. Cẩm Thành", "TIMESTAMP": "Ngày bán: 15/08/2020 09:16", "TOTAL_COST": "25.500"}

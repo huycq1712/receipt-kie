@@ -1,0 +1,1 @@
+{"SELLER": "PHẢ", "ADDRESS": "104 Trần Phú, phường Cẩm Tê, Thành phố Cẩm", "TIMESTAMP": "Ngày: 08/08/2020 (08:30 CH 08:30 CH)", "TOTAL_COST": "Tổng thanh toán"}

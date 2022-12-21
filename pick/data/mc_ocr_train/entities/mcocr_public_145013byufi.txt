@@ -1,0 +1,1 @@
+{"SELLER": "CH THỜI TRANG ADIDAS", "ADDRESS": "17A, KP.11,P.BTD, Q. Bình Tân", "TIMESTAMP": "Ngày 22/01/2020 Giờ: 16:49", "TOTAL_COST": "Tổng thành toàn"}

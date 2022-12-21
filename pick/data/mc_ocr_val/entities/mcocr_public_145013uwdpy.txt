@@ -1,0 +1,1 @@
+{"SELLER": "P. Cẩm Bình, TP. Cẩm Phả, QNH", "ADDRESS": "Tổ 7, Khu Minh Tiến A", "TIMESTAMP": "Ngày bán: 11/08/2020 09:51", "TOTAL_COST": "48.900"}

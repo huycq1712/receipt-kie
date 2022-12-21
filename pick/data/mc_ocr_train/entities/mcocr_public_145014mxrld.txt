@@ -1,0 +1,1 @@
+{"TOTAL_COST": "TỔNG TIỀN PHẢI T.TOÁN", "TIMESTAMP": "Ngày bán: 27/07/2020 20:35", "SELLER": "VinCommerce", "ADDRESS": "Q.Đống Đa, Hà Nội"}

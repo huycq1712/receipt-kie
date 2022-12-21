@@ -1,0 +1,1 @@
+{"SELLER": "VinCommerce", "ADDRESS": "TTTM Vincom Số 1 Phạm Ngọc Thạch", "TIMESTAMP": "Ngày/giờ: 14/08/2020 15:36", "TOTAL_COST": "184.500"}

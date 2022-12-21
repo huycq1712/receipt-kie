@@ -1,0 +1,1 @@
+{"SELLER": "Nhà Hàng Aozora Sushi", "ADDRESS": "153 Thuỷ Khuê, Quận Tây Hồ, Thành phố Hà Nội", "TIMESTAMP": "15-08-2020 18-27", "TOTAL_COST": "505,000đ"}

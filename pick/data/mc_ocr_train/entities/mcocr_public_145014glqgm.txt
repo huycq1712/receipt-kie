@@ -1,0 +1,1 @@
+{"SELLER": "VinMart", "TOTAL_COST": "49.062 49.062 49.062"}

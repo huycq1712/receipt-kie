@@ -1,0 +1,1 @@
+{"SELLER": "NHÀ SÁCH GD-TC CẨM PHẢ", "ADDRESS": "ĐC: 212 Đường Trần Phú-Cẩm Phả", "TOTAL_COST": "Tổng số thanh toán:", "TIMESTAMP": "Thời gian: 19:50:33 - 14/08/2020"}

@@ -1,0 +1,1 @@
+{"SELLER": "SIEU THI BACH HOA TONG HOP", "ADDRESS": "Số 5 Cẩm Tây - Cẩm Phả - QN", "TOTAL_COST": "Tổng cộng (đã gồm VAT):", "TIMESTAMP": "Ngày: 10/08/2020-11:"}

@@ -1,0 +1,1 @@
+{"SELLER": "Bún Bò Huế O Xuân", "ADDRESS": "CS1: 21-25 Tuệ Tĩnh - Hai Bà Trưng -Hà Nội", "TIMESTAMP": "Ngày: 14.07.2020", "TOTAL_COST": "Tiền Thanh Toán: 554 000"}

@@ -1,0 +1,1 @@
+{"ADDRESS": "Tổ 7, Khu Minh Tiến A", "SELLER": "VinCommerce", "TIMESTAMP": "Ngày bán: 14/08/2020 20:00", "TOTAL_COST": "20.900"}

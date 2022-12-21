@@ -1,0 +1,1 @@
+{"TIMESTAMP": "10:54:55", "TOTAL_COST": "Tong so tien thanh toan:"}

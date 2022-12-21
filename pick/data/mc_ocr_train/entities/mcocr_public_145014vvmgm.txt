@@ -1,0 +1,1 @@
+{"TOTAL_COST": "57.600", "TIMESTAMP": "Ngày bán: 08/08/2020 20:18", "SELLER": "VinCommerce", "ADDRESS": "TP.Cẩm Phả, Quảng Ninh"}

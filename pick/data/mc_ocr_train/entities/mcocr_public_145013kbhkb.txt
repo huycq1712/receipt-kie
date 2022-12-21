@@ -1,0 +1,1 @@
+{"SELLER": "KAI TEA", "ADDRESS": "Hà Đông, Hà Nội", "TIMESTAMP": "Giờ ra: 22.14", "TOTAL_COST": "102 850"}

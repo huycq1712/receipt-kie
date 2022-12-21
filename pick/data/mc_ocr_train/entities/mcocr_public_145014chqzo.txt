@@ -1,0 +1,1 @@
+{"SELLER": "CÔNG TY CỔ PHẦN BOT PHÁP VÂN - CẦU GIẼ", "ADDRESS": "Trụ sở chính: Km 188+300 cao tóc Pháp Vân - Cầu Giẽ, thôn Nội Am Xã Liên Ninh, Huyện Thanh Trì, Thành phố Hà Nội, Việt Nam", "TIMESTAMP": "14-08-2020", "TOTAL_COST": "Tổng số tiền:"}

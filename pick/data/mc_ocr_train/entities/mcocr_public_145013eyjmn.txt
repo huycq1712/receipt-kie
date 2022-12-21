@@ -1,0 +1,1 @@
+{"ADDRESS": "244/23a Huỳnh Văn Bánh, P.11, Q.PN", "TIMESTAMP": "04.10.2020 16.21", "TOTAL_COST": "88 000"}

@@ -1,0 +1,1 @@
+{"SELLER": "CTY TNHH EB BINH DUONG (\"EBBD\")", "ADDRESS": "P. Đong Hoa, TX Di An, Tỉnh Bình Duong", "TIMESTAMP": "07/09/2020 21:05:14", "TOTAL_COST": "620.1000"}

@@ -1,0 +1,1 @@
+{"SELLER": "VinMart", "ADDRESS": "ĐỊA CHỈ ĐẠI LÝ:", "TIMESTAMP": "GIỜ:", "TOTAL_COST": "VNĐ 99.716"}

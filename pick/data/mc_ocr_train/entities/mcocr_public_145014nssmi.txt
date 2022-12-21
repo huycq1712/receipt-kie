@@ -1,0 +1,1 @@
+{"SELLER": "VinCommerce", "ADDRESS": "P. Cẩm Bình, TP Cẩm Phảm - QNH", "TIMESTAMP": "Ngày bán: 12/08/2020 11:24", "TOTAL_COST": "TỔNG TIỀN PHẢI T.TOÁN"}

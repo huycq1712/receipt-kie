@@ -1,0 +1,1 @@
+{"SELLER": "NHÀ SÁCH GD-TC CẨM PHẢ", "ADDRESS": "ĐC: 212 Đường Trần Phú - Cẩm Phả", "TOTAL_COST": "291.000đ", "TIMESTAMP": "Thời gian: 18:55:02 - 09/08/2020"}

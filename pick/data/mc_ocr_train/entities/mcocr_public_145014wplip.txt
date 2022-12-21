@@ -1,0 +1,1 @@
+{"SELLER": "VinCommercce", "ADDRESS": "TP Cẩm Bình, Quảng Ninh", "TIMESTAMP": "Ngày bán: 12/08/2020 07:445", "TOTAL_COST": "23.400"}

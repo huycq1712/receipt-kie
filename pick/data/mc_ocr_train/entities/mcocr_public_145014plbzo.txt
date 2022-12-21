@@ -1,0 +1,1 @@
+{"SELLER": "VinCommerce", "ADDRESS": "Số 590 Trần Phú P. Cẩm Thuỷ", "TIMESTAMP": "Ngày bán: 15/08/2020 07:41", "TOTAL_COST": "3.997"}

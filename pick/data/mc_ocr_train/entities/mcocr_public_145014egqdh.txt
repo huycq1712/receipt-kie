@@ -1,0 +1,1 @@
+{"SELLER": "VinCommerce", "ADDRESS": "VM+ HNI 32 Láng Trung số 32 Ngô Láng Trung, P.Lăng Ha Q.Đống Đa , Hà Nội", "TIMESTAMP": "Ngày bán: 11/08/2020 18:06", "TOTAL_COST": "TỔNG TIỀN PHẢI T.TOÁN"}

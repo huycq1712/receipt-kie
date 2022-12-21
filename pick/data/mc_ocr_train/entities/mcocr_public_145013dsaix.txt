@@ -1,0 +1,1 @@
+{"TOTAL_COST": "510,000", "TIMESTAMP": "19-05-2018 16:16:53", "SELLER": "V09 - 336 Võ Văn Ngân Q TD", "ADDRESS": "Y09 -336 Vô Văn Ngân Q.TD"}

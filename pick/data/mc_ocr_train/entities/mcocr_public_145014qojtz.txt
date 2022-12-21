@@ -1,0 +1,1 @@
+{"SELLER": "VinCommerce", "ADDRESS": "P. Cẩm Bình, Tp. Cẩm Phả, QNH", "TIMESTAMP": "Ngày bán: 10/08/2020 11:37", "TOTAL_COST": "129.000"}

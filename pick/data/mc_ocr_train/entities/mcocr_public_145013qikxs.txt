@@ -1,0 +1,1 @@
+{"SELLER": "Cafe CJ Building", "ADDRESS": "Ben Nghe Ward, Dist, 1, HCM City", "TIMESTAMP": "08/12/2020 09:23", "TOTAL_COST": "420,000"}

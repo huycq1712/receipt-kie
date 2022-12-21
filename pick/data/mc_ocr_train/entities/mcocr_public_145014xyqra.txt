@@ -1,0 +1,1 @@
+{"SELLER": "BÁCH HOÁ XANH", "ADDRESS": "116-118 Vĩnh Hội, Phường 04, Quận 4, Thành phố Hồ Chí Minh, Việt Nam", "TIMESTAMP": "Ngày CT: 11/08/2020 18:57", "TOTAL_COST": "Tổng tiền: 218,770"}

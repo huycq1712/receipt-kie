@@ -1,0 +1,1 @@
+{"SELLER": "FamilyMart", "ADDRESS": "8 Đường số 35, KDC Cát Lái, P.Cát Lái, Q2", "TIMESTAMP": "Ngày : 17/08/2020 - Giờ: 19:37", "TOTAL_COST": "28,000"}

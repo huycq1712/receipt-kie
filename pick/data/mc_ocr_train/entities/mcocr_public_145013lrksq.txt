@@ -1,0 +1,1 @@
+{"TOTAL_COST": "Tổng tiền thanh toasn (Grand Total) CND", "TIMESTAMP": "10:50:14AM"}

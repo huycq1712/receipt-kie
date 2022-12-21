@@ -1,0 +1,1 @@
+{"SELLER": "CỬA HÀNG NĂM OÁNH", "ADDRESS": "Thôn Phú Thuỵ, Xã Phú Thị, Huyện Gia Lâm, TP Hà Nội", "TIMESTAMP": "Ngày: 11-08-2020", "TOTAL_COST": "45,000"}

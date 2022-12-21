@@ -1,0 +1,1 @@
+{"SELLER": "TÊN ĐẠI LÝ :", "ADDRESS": "TỔ 8, KHU 18, P. Cẩm TRUNG, T", "TIMESTAMP": "13:06:2020 17:28:03", "TOTAL_COST": "600.000 Đ"}

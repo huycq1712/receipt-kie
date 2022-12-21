@@ -1,0 +1,1 @@
+{"SELLER": "Giảm giá", "ADDRESS": "244/23a Huỳnh Văn Bánh, P.11, Q.PN", "TIMESTAMP": "30.09.2020 18.31", "TOTAL_COST": "Tiên Thanh Toán"}
