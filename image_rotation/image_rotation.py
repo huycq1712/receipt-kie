@@ -14,17 +14,23 @@ import pandas as pd
 from image_rotation.upsidedowndetector import UpsideDowndetector
 import ast
 
+import onnx
+import onnxruntime as rt
 class ImageRotation:
 
-    def __init__(self) -> None:
+    def __init__(self, use_onnx=True) -> None:
         self.upside_down_detector = UpsideDowndetector()
         self.transform = transforms.Compose([
             transforms.Resize((512, 512)),
             transforms.ToTensor()])
+        self.use_onnx = use_onnx
 
-        self.upside_down_detector.load_state_dict(torch.load("/content/drive/MyDrive/deploy/invoice_kie/image_rotation/weights/model_4.pt", map_location='cpu'))
-        self.upside_down_detector.eval()
-        #self.upside_down_detector.to('cuda')
+        if self.use_onnx:
+            self.upside_down_detector = rt.InferenceSession('/home/huycq/OCR/Project/KIE/invoice/invoice_kie/image_rotation/weights/model_4.onnx')
+        else:
+            self.upside_down_detector.load_state_dict(torch.load('/home/huycq/OCR/Project/KIE/invoice/invoice_kie/image_rotation/weights/model_4.pt', map_location='cpu'))
+            self.upside_down_detector.eval()
+            #self.upside_down_detector.to('cuda')
 
     def rotate_image(self, image, ground_truth_box=None):
         
@@ -32,12 +38,19 @@ class ImageRotation:
         image = Image.fromarray(image)
         image = self.transform(image)
         image = image.unsqueeze(0)#.to('cuda')
-        outputs = self.upside_down_detector(image)
+        
+        if self.use_onnx:
+            outputs = self.upside_down_detector.run(None, {self.upside_down_detector.get_inputs()[0].name: image.numpy()})[0]
+            outputs = torch.tensor(outputs)
+            print(outputs)
+        else:
+            outputs = self.upside_down_detector(image)
         
         outputs = outputs.squeeze(0)
         outputs = torch.softmax(outputs, dim=0)
         #outputs = outputs.argmax().item()
-        #boxes = ast.literal_eval(ground_truth_box["anno_polygons"].iloc[0])
+        #boxes = ast.literal_eval(ground_truth_box["anno_polygons"].iloc[0])]
+        print(outputs)
         if outputs[1] > 0.8:
 
             original_image = cv2.rotate(original_image, cv2.ROTATE_180)
