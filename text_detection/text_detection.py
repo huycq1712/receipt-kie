@@ -37,10 +37,10 @@ logger = get_logger()
 
 
 class TextDetector(object):
-    def __init__(self, args=None):
-        #self.args = args
+    def __init__(self):
+        self.args =  utility.parse_args()
         self.det_algorithm = 'DB'
-        #elf.use_onnx = args.use_onnx
+        self.use_onnx = False# self.args.use_onnx
         pre_process_list = [{
             'DetResizeForTest': {
                 'limit_side_len': 960,
@@ -74,11 +74,20 @@ class TextDetector(object):
 
         self.preprocess_op = create_operators(pre_process_list)
         self.postprocess_op = build_post_process(postprocess_params)
-        #self.predictor, self.input_tensor, self.output_tensors, self.config = utility.create_predictor(
-        #    args, 'det', logger)
+        self.predictor, self.input_tensor, self.output_tensors, self.config = utility.create_infer("/home/huycq/OCR/Project/KIE/invoice/invoice_kie/text_detection/PaddleOCR/ch_ppocr_server_v2.0_det_infer", 'det', use_onnx=self.use_onnx)
 
-        self.predictor, self.input_tensor, self.output_tensors, self.config = utility.create_infer("/content/drive/MyDrive/deploy/invoice_kie/text_detection/PaddleOCR/ch_ppocr_server_v2.0_det_infer", 'det')
-
+        """if self.use_onnx:
+            img_h, img_w = self.input_tensor.shape[2:]
+            print(self.input_tensor)
+            print(img_h)
+            print(img_w)
+            if img_h is not None and img_w is not None and img_h > 0 and img_w > 0:
+                pre_process_list[0] = {
+                    'DetResizeForTest': {
+                        'image_shape': [img_h, img_w]
+                    }
+                }"""
+                
         self.preprocess_op = create_operators(pre_process_list)
 
 
@@ -137,13 +146,17 @@ class TextDetector(object):
         shape_list = np.expand_dims(shape_list, axis=0)
         img = img.copy()
 
-        
-        self.input_tensor.copy_from_cpu(img)
-        self.predictor.run()
-        outputs = []
-        for output_tensor in self.output_tensors:
-            output = output_tensor.copy_to_cpu()
-            outputs.append(output)
+        if self.use_onnx:
+            input_dict = {}
+            input_dict[self.input_tensor.name] = img
+            outputs = self.predictor.run(self.output_tensors, input_dict)
+        else:
+            self.input_tensor.copy_from_cpu(img)
+            self.predictor.run()
+            outputs = []
+            for output_tensor in self.output_tensors:
+                output = output_tensor.copy_to_cpu()
+                outputs.append(output)
 
         preds = {}
         
@@ -155,8 +168,6 @@ class TextDetector(object):
 
         src_im = utility.draw_text_det_res(dt_boxes, ori_im)
         
-        dt_boxes = sorted(dt_boxes, key=lambda x: (x[0][1], x[0][0]), reverse=True)
-        #print(dt_boxes)
         return dt_boxes, src_im
 
     def detect_image(self, file_name):
@@ -173,6 +184,7 @@ class TextDetector(object):
                 for box_cor in dt_boxes:
                     box = {}
                     box['box'] = box_cor.tolist()
+                    #box['box_type'] = 'poly'
                     results['boxes'].append(box)
 
         return results
@@ -189,13 +201,17 @@ class TextDetector(object):
         shape_list = np.expand_dims(shape_list, axis=0)
         img = img.copy()
 
-       
-        self.input_tensor.copy_from_cpu(img)
-        self.predictor.run()
-        outputs = []
-        for output_tensor in self.output_tensors:
-            output = output_tensor.copy_to_cpu()
-            outputs.append(output)
+        if self.use_onnx:
+            input_dict = {}
+            input_dict[self.input_tensor.name] = img
+            outputs = self.predictor.run(self.output_tensors, input_dict)
+        else:
+            self.input_tensor.copy_from_cpu(img)
+            self.predictor.run()
+            outputs = []
+            for output_tensor in self.output_tensors:
+                output = output_tensor.copy_to_cpu()
+                outputs.append(output)
 
         preds = {}
 
