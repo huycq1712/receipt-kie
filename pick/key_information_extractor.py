@@ -22,21 +22,28 @@ from pick.data_utils.pick_infer_dataset import PICKInferDataset
 from pick.data_utils.pick_infer_dataset import BatchCollateFn
 from pick.utils.util import iob_index_to_str, text_index_to_str
 
+#import onnx
+
+from export_pick import PICKOnnxModel
+#PICKOnnxModel = []
 
 class KeyInforExtraction:
 
-    def __init__(self) -> None:
+    def __init__(self, use_onnx=False) -> None:
         super().__init__()
         self.device = torch.device(f'cuda:0' if torch.cuda.is_available() else 'cpu')
-        self.checkpoint = torch.load('/content/drive/MyDrive/deploy/invoice_kie/pick/weights/model_best.pth', map_location=self.device)
+        self.checkpoint = torch.load('/home/huycq/OCR/Project/KIE/invoice/invoice_kie/pick/weights/model_best.pth', map_location=self.device)
         self.config = self.checkpoint['config']
         self.state_dict = self.checkpoint['state_dict']
         self.monitor_best = self.checkpoint['monitor_best']
+        self.use_onnx = use_onnx
 
         self.pickmodel = self.config.init_obj('model_arch', pick_arch_module)
         self.pickmodel = self.pickmodel.to(self.device)
         self.pickmodel.load_state_dict(self.state_dict)
         self.pickmodel.eval()
+        if self.use_onnx:
+            self.pickmodel_onnx = PICKOnnxModel()
 
     def extract_key_information(self, image, boxes_and_transcript,  image_file, boxes_and_transcripts_folder):
         boxes_and_transcripts_folder: Path = Path(boxes_and_transcripts_folder)
@@ -62,14 +69,21 @@ class KeyInforExtraction:
                     if input_value is not None and isinstance(input_value, torch.Tensor):
                         input_data_item[key] = input_value.to(self.device)
 
+                output = self.pickmodel(**input_data_item) if not self.use_onnx else self.pickmodel_onnx(**input_data_item)
 
-                output = self.pickmodel(**input_data_item)
+
+                #output = self.pickmodel(**input_data_item)
                 logits = output['logits']  # (B, N*T, out_dim)
                 new_mask = output['new_mask']
                 image_indexs = input_data_item['image_indexs']  # (B,)
                 text_segments = input_data_item['text_segments']  # (B, num_boxes, T)
                 mask = input_data_item['mask']
                 # List[(List[int], torch.Tensor)]
+
+                if self.use_onnx:
+                    logits = torch.from_numpy(logits)
+                    new_mask = torch.from_numpy(new_mask)
+                    
                 best_paths = self.pickmodel.decoder.crf_layer.viterbi_tags(logits, mask=new_mask, logits_batch_first=True)
                 predicted_tags = []
                 for path, score in best_paths:
