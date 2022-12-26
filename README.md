@@ -17,7 +17,7 @@ This project aims to extract key information from receipt. The receipt is in Vie
 - [x] Vietocr for text recognition 
 - [X] PICK for key information extraction
 - [ ] Post-processing for each key information
-- [ ] Convert to onnx and trt
+- [x] Convert to onnx and trt
 - [x] Demo on Streamlit
 - [ ] Clean code
 - [ ] Using segmentation model for background removal
