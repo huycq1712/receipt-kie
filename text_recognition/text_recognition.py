@@ -1,5 +1,8 @@
 import torch
 import torch.nn as nn
+import time
+import sys
+sys.path.append('/home/huycq/OCR/Project/KIE/invoice/invoice_kie/text_recognition/vietocr/')
 
 from vietocr.tool.predictor import Predictor
 from vietocr.tool.config import Cfg
@@ -15,16 +18,34 @@ from PIL import Image, ImageEnhance
 import os
 import glob
 from tqdm import tqdm
+import inspect
+
+import sys
+sys.path.append('/home/huycq/OCR/Project/KIE/invoice/invoice_kie/text_recognition/')
+
+from export_vietocr import VietOcrExporter, VietOcrOnnx
 
 class TextRecognition:
 
-    def __init__(self) -> None:
-        self.config = Cfg.load_config_from_name('vgg_seq2seq')
-        self.config['weights'] = '/content/drive/MyDrive/deploy/invoice_kie/text_recognition/vietocr/weights/transformerocr.pth'
-        self.config['cnn']['pretrained']=False
-        self.config['device'] = 'cpu'
-        self.config['predictor']['beamsearch']=False
-        self.recognizer = Predictor(self.config)
+    def __init__(self, use_onnx=False) -> None:
+        self.use_onnx = use_onnx
+        if self.use_onnx:
+            self.recognizer = VietOcrOnnx(onnx_path=[
+                '/home/huycq/OCR/Project/KIE/invoice/invoice_kie/text_recognition/vietocr/weights/vietocr_cnn.onnx',
+                '/home/huycq/OCR/Project/KIE/invoice/invoice_kie/text_recognition/vietocr/weights/vietocr_encoder.onnx',
+                '/home/huycq/OCR/Project/KIE/invoice/invoice_kie/text_recognition/vietocr/weights/vietocr_decoder.onnx'
+            ])
+            
+        else:
+            self.config = Cfg.load_config_from_name('vgg_seq2seq')
+            self.config['weights'] = '/home/huycq/OCR/Project/KIE/invoice/invoice_kie/text_recognition/vietocr/weights/transformerocr.pth'
+            self.config['cnn']['pretrained']=False
+            self.config['device'] = 'cpu'
+            #self.config['predictor']['beamsearch']= True
+            self.recognizer = Predictor(self.config)
+            
+            print(os.path.abspath(inspect.getfile(Predictor)))
+            
 
     def recognize_from_json(self, json_path):
         with open(json_path, "r") as f:
@@ -41,8 +62,10 @@ class TextRecognition:
         image = np.asarray(image)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         image = cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+        
         #new_img = Image.fromarray(new_img)
         image = Image.fromarray(image)
+        print(image.shape)
 
         for i, box in enumerate(data["boxes"]):
 
@@ -56,8 +79,9 @@ class TextRecognition:
 
             cropped_image = image.crop((left, top, right, bottom))
             cropped_image = cropped_image.convert("L")
-            cropped_image.save(save_text_box_path + "/" + "text_{}.jpg".format(i))
+            #cropped_image.save(save_text_box_path + "/" + "text_{}.jpg".format(i))
             #cropped_image = cropped_image.convert
+            
             text = self.recognizer.predict(cropped_image)
             data["boxes"][i]["text"] = text
 
@@ -90,13 +114,14 @@ class TextRecognition:
             bottom = min(max(y) + 3, image.height)
 
             cropped_image = image.crop((left, top, right, bottom))
-            cropped_image = cropped_image.convert("L")
+            #cropped_image = cropped_image.convert("L")
+            start = time.time()
             text = self.recognizer.predict(cropped_image)
+            print("Take for one image", time.time() - start)
 
             text_box["text"] = text
             result.append(text_box)
-        print("$$$$$$$$$$$$$$$$$")
-        print(result)
+        
         return result
 
 
