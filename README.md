@@ -20,7 +20,7 @@ This project aims to extract key information from receipt. The receipt is in Vie
 - [ ] Clean code
 - [ ] Using segmentation model for background removal
 - [ ] LayoutLM3 for key information extraction
-- [ ] Docker 
+- [x] Docker 
 - [x] Convert to onnx and trt
 - [x] Demo on Streamlit
 - [x] Trition serving
