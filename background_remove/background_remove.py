@@ -14,7 +14,7 @@ import pandas as pd
 
 class BackgroundRemove:
 
-    def __init__(self, src='/content/drive/MyDrive/deploy/invoice_kie/background_remove/yolov5', model_path='/content/drive/MyDrive/deploy/invoice_kie/background_remove/yolov5/weights/best_ok.pt') -> None:
+    def __init__(self, src='/home/huycq/OCR/Project/KIE/invoice/invoice_kie/background_remove/yolov5', model_path='/home/huycq/OCR/Project/KIE/invoice/invoice_kie/background_remove/yolov5/weights/best_ok.onnx') -> None:
         self.model = torch.hub.load(src, 'custom', model_path, source='local')
         self.size = 640
 
@@ -79,8 +79,11 @@ class BackgroundRemove:
 
     
     def remove_background(self, img):
+        #img = Image.open('/home/huycq/OCR/Project/KIE/invoice/invoice_kie/pick/data/mc_ocr_train/images/mcocr_public_145013aagqw.jpg')
+        img = img.resize((self.size, self.size))
         results = self.model(img)
         #get max confidence
+        #print(results.shape)
         if results.pred[0].shape[0] !=0 :
             max_conf_box = torch.argmax(results.pred[0][:, 4], axis=0)
             x1, y1, x2, y2 = results.pred[0][max_conf_box, :4].cpu().numpy()
@@ -89,6 +92,9 @@ class BackgroundRemove:
         return img
 
 if __name__ == '__main__':
+    img = Image.open('/home/huycq/OCR/Project/KIE/invoice/invoice_kie/pick/data/mc_ocr_train/images/mcocr_public_145013aagqw.jpg')
     br = BackgroundRemove()
+    br.remove_background(img)
+    img.save("test.jpg")
     #br.remove_background_from_image('data/images/zidane.jpg', 'data/images/zidane_out.jpg')
-    br.remove_background_from_directory('/content/drive/MyDrive/invoice_kie/data/mcocr_public_train_test_shared_data/mcocr_val_data/val_images', '/content/drive/MyDrive/invoice_kie/data/mcocr_public_train_test_shared_data/mcocr_val_data/val_images_br')
+    #br.remove_background_from_directory('/content/drive/MyDrive/invoice_kie/data/mcocr_public_train_test_shared_data/mcocr_val_data/val_images', '/content/drive/MyDrive/invoice_kie/data/mcocr_public_train_test_shared_data/mcocr_val_data/val_images_br')
