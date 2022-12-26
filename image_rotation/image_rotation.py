@@ -2,62 +2,62 @@ import torch
 import torch.nn as nn
 import torchvision.transforms as transforms
 
-import os
-import PIL
-from PIL import Image
-import cv2
-import numpy as np
-import math
-from scipy import ndimage
-from tqdm import tqdm
-import pandas as pd
-from image_rotation.upsidedowndetector import UpsideDowndetector
 import ast
-
-import onnx
+import cv2
+import os
+import math
+import numpy as np
+import pandas as pd
+from PIL import Image
+from tqdm import tqdm
 import onnxruntime as rt
+
+from image_rotation.upsidedowndetector import UpsideDowndetector
+from config import model_config
+
+
 class ImageRotation:
 
-    def __init__(self, use_onnx=True) -> None:
+    def __init__(self, cfg=model_config) -> None:
+        self.cfg = cfg
+        self.use_onnx = self.cfg['image_rotation']['use_onnx']
+        self.device = self.cfg['device']
         self.upside_down_detector = UpsideDowndetector()
         self.transform = transforms.Compose([
             transforms.Resize((512, 512)),
             transforms.ToTensor()])
-        self.use_onnx = use_onnx
+        
 
         if self.use_onnx:
-            self.upside_down_detector = rt.InferenceSession('/home/huycq/OCR/Project/KIE/invoice/invoice_kie/image_rotation/weights/model_4.onnx')
+            self.upside_down_detector = rt.InferenceSession(self.cfg['image_rotation']['onnx_path'][0])
         else:
-            self.upside_down_detector.load_state_dict(torch.load('/home/huycq/OCR/Project/KIE/invoice/invoice_kie/image_rotation/weights/model_4.pt', map_location='cpu'))
+            self.upside_down_detector.load_state_dict(torch.load(self.cfg['image_rotation']['model_path'], map_location=self.device))
             self.upside_down_detector.eval()
-            #self.upside_down_detector.to('cuda')
+            self.upside_down_detector.to(self.device)
+
 
     def rotate_image(self, image, ground_truth_box=None):
         
         original_image = image.copy()
         image = Image.fromarray(image)
         image = self.transform(image)
-        image = image.unsqueeze(0)#.to('cuda')
+        image = image.unsqueeze(0).to(self.device)
         
         if self.use_onnx:
             outputs = self.upside_down_detector.run(None, {self.upside_down_detector.get_inputs()[0].name: image.numpy()})[0]
             outputs = torch.tensor(outputs)
-            print(outputs)
         else:
             outputs = self.upside_down_detector(image)
         
         outputs = outputs.squeeze(0)
         outputs = torch.softmax(outputs, dim=0)
-        #outputs = outputs.argmax().item()
-        #boxes = ast.literal_eval(ground_truth_box["anno_polygons"].iloc[0])]
-        print(outputs)
+        
         if outputs[1] > 0.8:
 
             original_image = cv2.rotate(original_image, cv2.ROTATE_180)
             if ground_truth_box is not None:
                 boxes = ast.literal_eval(ground_truth_box["anno_polygons"].iloc[0])
-                
-                #boxes = ground_truth_box["anno_polygons"]
+        
                 for i, text_box in enumerate(boxes):
                     for j, seg in enumerate(text_box['segmentation']):
                         for k in range(0, len(seg), 2):
@@ -78,15 +78,12 @@ class ImageRotation:
         angles = []
 
         if lines is None:
-            #ground_truth_box["anno_polygons"].iloc[0] = str(boxes)
             original_image = Image.fromarray(original_image)
             return original_image, ground_truth_box
 
         for [[x1, y1, x2, y2]] in lines:
             angle = math.degrees(math.atan2(y2 - y1, x2 - x1))
             angles.append(angle)
-
-            
 
         median_angle = np.median(angles)
 

@@ -25,6 +25,7 @@ from pick.data_utils.pick_infer_dataset import BatchCollateFn
 from pick.utils.util import iob_index_to_str, text_index_to_str
 
 #from key_information_extractor import KeyInforExtraction
+from config import model_config
 
 class PICKOnnxExporter:
     def __init__(self) -> None:
@@ -170,12 +171,13 @@ class PICKOnnxExporter:
         self.decoder_export()
 
 class PICKOnnxModel:
-    def __init__(self):
+    def __init__(self, cfg=model_config):
         self.training = False
-        self.word_emb = rt.InferenceSession('/home/huycq/OCR/Project/KIE/invoice/invoice_kie/pick/weights/embedding.onnx')
-        self.encoder = rt.InferenceSession('/home/huycq/OCR/Project/KIE/invoice/invoice_kie/pick/weights/encoder.onnx')
-        self.graph = rt.InferenceSession('/home/huycq/OCR/Project/KIE/invoice/invoice_kie/pick/weights/graph.onnx')
-        self.decoder = rt.InferenceSession('/home/huycq/OCR/Project/KIE/invoice/invoice_kie/pick/weights/decoder.onnx')
+        self.cfg = cfg
+        self.word_emb = rt.InferenceSession(self.cfg['key_information_extraction']['onnx'][0])
+        self.encoder = rt.InferenceSession(self.cfg['key_information_extraction']['onnx'][1])
+        self.graph = rt.InferenceSession(self.cfg['key_information_extraction']['onnx'][2])
+        self.decoder = rt.InferenceSession(self.cfg['key_information_extraction']['onnx'][3])
     
     
     def __call__(self, **kwargs):

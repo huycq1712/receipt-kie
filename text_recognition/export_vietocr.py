@@ -1,21 +1,15 @@
 import torch
-import torch.nn as nn
 from torchvision.transforms import transforms
-from torch.nn.functional import log_softmax, softmax
-
-import onnxruntime as ort
-import onnx
-
+from torch.nn.functional import log_softmax
 import numpy as np
-import matplotlib.pyplot as plt
 from PIL import Image
 
-from vietocr.tool.predictor import Predictor
 from vietocr.tool.config import Cfg
-from vietocr.tool.translate import build_model, process_input, translate
+from vietocr.tool.translate import build_model
 from vietocr.model.beam import Beam
 
-import time
+import onnxruntime as ort
+
 
 class VietOcrExporter:
     
@@ -144,8 +138,7 @@ class VietOcrOnnx:
         encoder_input = {self.encoder_session.get_inputs()[0].name: src[0]}
         encoder_outputs, hidden = self.encoder_session.run(None, encoder_input)
         translated_sentence = [[sos_token]*len(image)]
-        
-        #char_probs = [[1]*len(image)]
+
         max_length = 0
         while max_length <= max_seq_length and not all(np.any(np.asarray(translated_sentence).T==eos_token, axis=1)):
         
@@ -159,10 +152,7 @@ class VietOcrOnnx:
             
             output, hidden, _ = self.decoder_session.run(None, decoder_input)
             output = torch.tensor(output)
-            #print("out", output.shape)
             output = output.unsqueeze(1)
-            
-            
             output = torch.softmax(output, dim=-1)
             
             _, indices  = torch.topk(output, 5)
@@ -170,32 +160,17 @@ class VietOcrOnnx:
             indices = indices[:, -1, 0]
             indices = indices.tolist()
             
-            #values = values[:, -1, 0]
-            #values = values.tolist()
-            #char_probs.append(values)
-
             translated_sentence.append(indices)   
             max_length += 1
 
             del output
                 
         translated_sentence = np.asarray(translated_sentence).T
-        #char_probs = np.asarray(char_probs).T
-        #char_probs = np.multiply(char_probs, translated_sentence>3)
-        #char_probs = np.sum(char_probs, axis=-1)/(char_probs>0).sum(-1)
-        
-        
-        #print(list(translated_sentence)[0])
         s = self.vocab.decode(translated_sentence[0].tolist())
         return s
     
     def beamsearch(self, memory, beam_size=4, candidates=1, max_seq_length=128, sos_token=1, eos_token=2):    
-    # memory: Tx1xE
-    #model.eval()
-
         beam = Beam(beam_size=beam_size, min_length=0, n_top=candidates, ranker=None, start_token_id=sos_token, end_token_id=eos_token)
-
-        start_convert = time.time()
         hidden, encoder_outputs = memory
         hidden = torch.tensor(hidden)
         encoder_outputs = torch.tensor(encoder_outputs)
@@ -205,19 +180,16 @@ class VietOcrOnnx:
         
         hidden = np.array(hidden)
         encoder_outputs = np.array(encoder_outputs)
-        print("convert time", time.time() - start_convert)
 
         for _ in range(max_seq_length):
             
             tgt_inp = beam.get_current_state().transpose(0,1).to('cpu')  # TxN
             
-            start_decoder = time.time()
             decoder_outputs, hidden, _ = self.decoder_session.run(None, {
                 self.decoder_session.get_inputs()[0].name: np.array(tgt_inp)[-1],
                 self.decoder_session.get_inputs()[1].name: hidden,
                 self.decoder_session.get_inputs()[2].name: encoder_outputs
             })
-            print("decoder time", time.time() - start_decoder)
             
             decoder_outputs = torch.tensor(decoder_outputs)
             decoder_outputs = decoder_outputs.unsqueeze(1)
@@ -234,12 +206,11 @@ class VietOcrOnnx:
             hypothesis = beam.get_hypothesis(times, k)
             hypothesises.append(hypothesis)
 
-        print("time on beam", time.time() - start_convert)
         return [1] + [int(i) for i in hypothesises[0][:-1]]
     
+    
     def predict(self, image):
-        print("dcmm")
-        # img: 1xCxHxW
+
         image = self.transforms(image)
         image = image.unsqueeze(0)
         image = np.asarray(image)
@@ -249,16 +220,11 @@ class VietOcrOnnx:
         max_seq_length=128
         sos_token=1
         eos_token=2
-        start = time.time()
-        src = self.cnn_session.run(None, {self.cnn_session.get_inputs()[0].name: image})[0]
-        print("cnn time", time.time() - start)
-        start = time.time()
-        encoder_outputs, hidden = self.encoder_session.run(None, {self.encoder_session.get_inputs()[0].name: src})
-        print("encoder time", time.time() - start)
-        memory = (hidden, encoder_outputs)
 
+        src = self.cnn_session.run(None, {self.cnn_session.get_inputs()[0].name: image})[0]
+        encoder_outputs, hidden = self.encoder_session.run(None, {self.encoder_session.get_inputs()[0].name: src})
+        memory = (hidden, encoder_outputs)
         sent = self.beamsearch(memory, beam_size, candidates, max_seq_length, sos_token, eos_token)
-        
         sent = self.vocab.decode(sent)
 
         return sent

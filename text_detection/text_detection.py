@@ -33,14 +33,16 @@ from PaddleOCR.ppocr.data import create_operators, transform
 from PaddleOCR.ppocr.postprocess import build_post_process
 import json
 from tqdm import tqdm
+from config import model_config
 logger = get_logger()
 
 
 class TextDetector(object):
-    def __init__(self):
-        self.args =  utility.parse_args()
+    def __init__(self, cfg=model_config):
+        self.cfg = cfg
         self.det_algorithm = 'DB'
-        self.use_onnx = False# self.args.use_onnx
+        self.use_onnx = self.cfg['text_detection']['use_onnx']
+        self.model_path = self.cfg['text_detection']['onnx_path'][0] if self.use_onnx else self.cfg['text_detection']['model_path']
         pre_process_list = [{
             'DetResizeForTest': {
                 'limit_side_len': 960,
@@ -74,19 +76,7 @@ class TextDetector(object):
 
         self.preprocess_op = create_operators(pre_process_list)
         self.postprocess_op = build_post_process(postprocess_params)
-        self.predictor, self.input_tensor, self.output_tensors, self.config = utility.create_infer("/home/huycq/OCR/Project/KIE/invoice/invoice_kie/text_detection/PaddleOCR/ch_ppocr_server_v2.0_det_infer", 'det', use_onnx=self.use_onnx)
-
-        """if self.use_onnx:
-            img_h, img_w = self.input_tensor.shape[2:]
-            print(self.input_tensor)
-            print(img_h)
-            print(img_w)
-            if img_h is not None and img_w is not None and img_h > 0 and img_w > 0:
-                pre_process_list[0] = {
-                    'DetResizeForTest': {
-                        'image_shape': [img_h, img_w]
-                    }
-                }"""
+        self.predictor, self.input_tensor, self.output_tensors, self.config = utility.create_infer(self.model_path, 'det', use_onnx=self.use_onnx)
                 
         self.preprocess_op = create_operators(pre_process_list)
 
@@ -248,39 +238,3 @@ if __name__ == "__main__":
     args = utility.parse_args()
     text_detector = TextDetector(args)
     text_detector.detect_directory()
-    """args = utility.parse_args()
-    image_file_list = get_image_file_list(args.image_dir)
-    text_detector = TextDetector(args)
-    total_time = 0
-    draw_img_save_dir = args.draw_img_save_dir
-    os.makedirs(draw_img_save_dir, exist_ok=True)
-
-    if args.warmup:
-        img = np.random.uniform(0, 255, [640, 640, 3]).astype(np.uint8)
-        for i in range(2):
-            res = text_detector(img)
-
-    save_results = []
-    for idx, image_file in enumerate(image_file_list):
-        img, flag_gif, flag_pdf = check_and_read(image_file)
-        if not flag_gif and not flag_pdf:
-            img = cv2.imread(image_file)
-        if not flag_pdf:
-            if img is None:
-                logger.debug("error in loading image:{}".format(image_file))
-                continue
-            imgs = [img]
-        else:
-            page_num = args.page_num
-            if page_num > len(img) or page_num == 0:
-                page_num = len(img)
-            imgs = img[:page_num]
-        for index, img in enumerate(imgs):
-            dt_boxes, s , image_save = text_detector.rotate_90_detect(img)
-
-            save_file = image_file
-            img_path = os.path.join(
-                draw_img_save_dir,
-                "det_res_{}".format(os.path.basename(save_file)))
-            cv2.imwrite(img_path, image_save)
-            logger.info("The visualized image saved in {}".format(img_path))"""

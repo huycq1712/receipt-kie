@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 # @Author: Wenwen Yu
 # @Created Time: 7/13/2020 10:26 PM
+import sys, os
+sys.path.append('/content/drive/MyDrive/deploy/invoice_kie/pick')
 
 import argparse
 import torch
 from tqdm import tqdm
 from pathlib import Path
-
-import sys, os
-sys.path.append('/content/drive/MyDrive/deploy/invoice_kie/pick')
-
 
 from torch.utils.data.dataloader import DataLoader
 from allennlp.data.dataset_readers.dataset_utils.span_utils import bio_tags_to_spans
@@ -17,26 +15,24 @@ from allennlp.data.dataset_readers.dataset_utils.span_utils import bio_tags_to_s
 from pick.parse_config import ConfigParser
 import pick.model.pick as pick_arch_module
 from pick.data_utils import documents
-#from pick.data_utils.pick_dataset import PICKDataset
 from pick.data_utils.pick_infer_dataset import PICKInferDataset
 from pick.data_utils.pick_infer_dataset import BatchCollateFn
 from pick.utils.util import iob_index_to_str, text_index_to_str
 
-#import onnx
-
 from export_pick import PICKOnnxModel
-#PICKOnnxModel = []
+from config import model_config
 
 class KeyInforExtraction:
 
-    def __init__(self, use_onnx=False) -> None:
-        super().__init__()
-        self.device = torch.device(f'cuda:0' if torch.cuda.is_available() else 'cpu')
-        self.checkpoint = torch.load('/home/huycq/OCR/Project/KIE/invoice/invoice_kie/pick/weights/model_best.pth', map_location=self.device)
+    def __init__(self, cfg=model_config) -> None:
+        
+        self.cfg = cfg
+        self.device = cfg['device']
+        self.checkpoint = torch.load(self.cfg['key_information_extraction']['model_path'], map_location=self.device)
         self.config = self.checkpoint['config']
         self.state_dict = self.checkpoint['state_dict']
         self.monitor_best = self.checkpoint['monitor_best']
-        self.use_onnx = use_onnx
+        self.use_onnx = self.cfg['key_information_extraction']['use_onnx']
 
         self.pickmodel = self.config.init_obj('model_arch', pick_arch_module)
         self.pickmodel = self.pickmodel.to(self.device)
